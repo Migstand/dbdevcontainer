@@ -1,3 +1,5 @@
+CREATE SCHEMA dbex;
+
 CREATE TABLE IF NOT EXISTS Pessoa(
     cpf CHAR(11) PRIMARY KEY,
     email VARCHAR(50) NOT NULL,
@@ -118,6 +120,12 @@ DELETE FROM Agendamento
 
 DELETE FROM Paciente 
     WHERE plano_saude = TRUE or cpf_pessoa IN (SELECT cpf FROM Pessoa WHERE telefone IS NULL);;    
+
+DELETE FROM MedicoEspecialidade
+WHERE cpf_medico = '004';
+
+DELETE FROM Agendamento
+    WHERE cpf_medico = '004';
 
 DELETE FROM Medico
     WHERE cpf_pessoa = '004';
