@@ -11,6 +11,48 @@ SELECT COUNT(*) AS 'quantidade_agendamento' FROM dbo.Agendamento ; -- Seleciona 
 
 -- ** PARTE DE FONTENELE **
 
+-- QUESTÃO 6 Listar a data/hora das consultas e os respectivos valores com desconto de 5%. Os valores devem ser precedidos com "R$". Por exemplo: R$ 150.00.
+
+SELECT
+    dh_consulta,
+    CONCAT('R$ ', valor * 0.95) AS valor_com_desconto /* CONCAT junta o "R$" com o "valor * 0.95" que aplica o desconto; AS dá um nome ao resultado da operação */
+FROM Agendamento; -- Os dados serão obtidos da tabela Agendamento.
+
+-- QUESTÃO 7 Listar nome, cpf e e-mail dos pacientes que não possuem plano de saúde.
+ 
+SELECT
+    nome,
+    cpf,
+    email
+FROM Paciente -- De Paciente
+WHERE plano_saude IS NULL; -- onde plano_saude é nulo
+
+-- QUESTÃO 8 Listar os dados dos agendamentos registrados para o mesmo o mês da consulta.
+
+SELECT * -- Seleciona todas as colunas da tabela Agendamento.
+
+FROM Agendamento 
+
+WHERE EXTRACT(MONTH FROM dh_agendamento) = EXTRACT(MONTH FROM dh_consulta); /* EXTRACT(MONTH FROM ...) extrai apenas o mês da data. Apenas os agendamentos em que o mês do registro é igual ao mês da consulta serão exibidos. */
+
+-- QUESTÃO 9 Lista cpf, nome e e-mail dos pacientes que não possuem telefone.
+
+SELECT   
+    cpf,
+    nome,
+    email
+
+FROM Paciente 
+
+WHERE telefone IS NULL; -- Filtra apenas os pacientes cujo telefone não foi informado.
+
+-- QUESTÃO 10 Listar a data das consultas cujo valor está entre R$ 50,00 e R$ 100,00.
+
+SELECT dh_consulta
+
+FROM Agendamento
+
+WHERE valor_consulta BETWEEN 50.00 AND 100.00; -- BETWEEN verifica se um valor está dentro de um intervalo. Apenas retornando nesse caso apenas consultas maiores que 50,00 e menores ou iguais a 100,00.
 
 -- Parte de Gustavo
 
