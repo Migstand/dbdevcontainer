@@ -1,13 +1,13 @@
 -- ** PARTE DE MIGUEL **
-SELECT * FROM dbo.Pessoa; --Coleta todos os dados da tabela pessoa
+SELECT * FROM Pessoa; --Coleta todos os dados da tabela pessoa
 SELECT nome, email, data_nasc 
-    FROM dbo.Pessoa; -- Lista todos os nome, emails e datas de nascimento
+    FROM Pessoa; -- Lista todos os nome, emails e datas de nascimento
 
-SELECT nome, email, data_nasc FROM dbo.Pessoa ORDER BY id LIMIT 6 OFFSET 2; --Pega os primeiros dados a partir do 3 até o oitavo. OBS: PRECISO SABER O QUE O ORDER BY FAZ
+SELECT nome, email, data_nasc FROM Pessoa LIMIT 6 OFFSET 2; --Pega os primeiros dados a partir do 3 até o oitavo. OBS: PRECISO SABER O QUE O ORDER BY FAZ
 
-SELECT nome, email, EXTRACT(YEAR FROM AGE(CURRENT_DATE, data_nasc)) FROM dbo.Pessoa -- Seleciona os nomes, os emails e as idades das pessoas
+SELECT nome, email, EXTRACT(YEAR FROM AGE(CURRENT_DATE, data_nasc)) FROM Pessoa; -- Seleciona os nomes, os emails e as idades das pessoas
 
-SELECT COUNT(*) AS 'quantidade_agendamento' FROM dbo.Agendamento ; -- Seleciona a quantidade de tabelas de agendamento
+SELECT COUNT(*)  FROM Agendamento ; -- Seleciona a quantidade de tabelas de agendamento
 
 -- ** PARTE DE FONTENELE **
 
@@ -15,17 +15,26 @@ SELECT COUNT(*) AS 'quantidade_agendamento' FROM dbo.Agendamento ; -- Seleciona 
 
 SELECT
     dh_consulta,
-    CONCAT('R$ ', valor * 0.95) AS valor_com_desconto /* CONCAT junta o "R$" com o "valor * 0.95" que aplica o desconto; AS dá um nome ao resultado da operação */
+    CONCAT('R$ ', valor_consulta * 0.95) AS valor_com_desconto /* CONCAT junta o "R$" com o "valor * 0.95" que aplica o desconto; AS dá um nome ao resultado da operação */
 FROM Agendamento; -- Os dados serão obtidos da tabela Agendamento.
 
 -- QUESTÃO 7 Listar nome, cpf e e-mail dos pacientes que não possuem plano de saúde.
  
-SELECT
-    nome,
-    cpf,
-    email
-FROM Paciente -- De Paciente
-WHERE plano_saude IS NULL; -- onde plano_saude é nulo
+SELECT nome, cpf, email
+    FROM Pessoa
+
+    JOIN Paciente
+    ON Pessoa.cpf = Paciente.cpf_pessoa
+
+    WHERE Paciente.plano_saude = false
+
+-- SELECT
+--     nome,
+--     cpf,
+--     email
+    
+-- FROM Paciente -- De Paciente
+-- WHERE plano_saude IS NULL; -- onde plano_saude é nulo
 
 -- QUESTÃO 8 Listar os dados dos agendamentos registrados para o mesmo o mês da consulta.
 
@@ -88,7 +97,7 @@ SELECT AVG(valor_consulta) AS media_valores -- Calcula a média dos valores das 
 
 -- Questão 16
 SELECT nome, email, data_nasc -- Seleciona o nome, e-mail e data de nascimento da pessoa
-    FROM dbo.Pessoa -- Começa pela tabela Pessoa
+    FROM Pessoa -- Começa pela tabela Pessoa
 
     JOIN Paciente -- Relaciona a pessoa com o cadastro de paciente
     ON Pessoa.cpf = Paciente.cpf_pessoa
@@ -103,7 +112,7 @@ SELECT nome, email, data_nasc -- Seleciona o nome, e-mail e data de nascimento d
 
 -- Questão 17
 SELECT nome, email, cpf, descricao -- Seleciona o nome, e-mail, CPF e a descrição da especialidade
-    FROM dbo.Pessoa
+    FROM Pessoa
 
     JOIN Medico -- Relaciona a pessoa com o cadastro de médico
     ON Pessoa.cpf = Medico.cpf_pessoa
