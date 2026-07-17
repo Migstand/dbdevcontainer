@@ -36,11 +36,11 @@ SELECT Medico.crm -- Seleciona apenas a coluna CRM dos médicos.
 FROM Medico
 
 INNER JOIN MedicoEspecialidade
-ON Medico.crm = MedicoEspecialidade.crm_medico -- Relaciona cada médico às suas especialidades.
+ON Medico.cpf_pessoa = MedicoEspecialidade.cpf_medico -- Relaciona cada médico às suas especialidades.
 
 
 INNER JOIN Especialidade
-ON MedicoEspecialidade.id_especialidade = Especialidade.id_especialidade -- Relaciona o código da especialidade à tabela Especialidade.
+ON MedicoEspecialidade.id_especialidade = Especialidade.id -- Relaciona o código da especialidade à tabela Especialidade.
 
 WHERE Especialidade.descricao = 'Cardiologia'; -- Filtra apenas os médicos cuja especialidade é Cardiologia.
 
@@ -55,10 +55,10 @@ SELECT
 FROM Pessoa
 
 INNER JOIN Paciente
-ON Pessoa.cpf = Paciente.cpf -- Relaciona a pessoa com seus dados de paciente.
+ON Pessoa.cpf = Paciente.cpf_pessoa -- Relaciona a pessoa com seus dados de paciente.
 
 INNER JOIN Medico
-ON Pessoa.cpf = Medico.cpf -- Relaciona a mesma pessoa com seus dados de médico.
+ON Pessoa.cpf = Medico.cpf_pessoa -- Relaciona a mesma pessoa com seus dados de médico.
 
 -- QUESTÃO 6 Listar o nome dos médicos e as respectivas quantidades de consultas agendadas.
 
@@ -69,16 +69,17 @@ SELECT
 FROM Medico
 
 INNER JOIN Pessoa
-ON Medico.cpf = Pessoa.cpf -- Obtém o nome de cada médico.
+ON Medico.cpf_pessoa = Pessoa.cpf -- Obtém o nome de cada médico.
 
 LEFT JOIN Agendamento
-ON Medico.cpf = Agendamento.cpf_medico -- O LEFT JOIN garante que médicos sem consultas também apareçam. Relaciona o médico aos agendamentos.
+ON Medico.cpf_pessoa = Agendamento.cpf_medico -- O LEFT JOIN garante que médicos sem consultas também apareçam. Relaciona o médico aos agendamentos.
 
 GROUP BY Pessoa.nome; -- Agrupa os registros por médico para que o COUNT conte as consultas de cada um.
 
 
 
 -- ** Parte de Miguel **
+--falta terminar
 
 SELECT esp.*, med.*
     FROM Especialidade esp INNER JOIN Medico  med,
@@ -88,4 +89,4 @@ SELECT esp.*, med.*
 
 SELECT 
 
--- Parte de Gustavo
+-- -- -- Parte de Gustavo
