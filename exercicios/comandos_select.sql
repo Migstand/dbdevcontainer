@@ -7,7 +7,7 @@ SELECT nome, email, data_nasc FROM Pessoa LIMIT 6 OFFSET 2; --Pega os primeiros 
 
 SELECT nome, email, EXTRACT(YEAR FROM AGE(CURRENT_DATE, data_nasc)) FROM Pessoa; -- Seleciona os nomes, os emails e as idades das pessoas
 
-SELECT COUNT(*)  FROM Agendamento ; -- Seleciona a quantidade de tabelas de agendamento
+SELECT COUNT(*) FROM Agendamento ; -- Seleciona a quantidade de tabelas de agendamento
 
 -- ** PARTE DE FONTENELE **
 
@@ -68,23 +68,23 @@ SELECT cpf, nome, email
     FROM Pessoa
     JOIN Paciente
     ON Pessoa.cpf = Paciente.cpf_pessoa
-    WHERE cidade = 'Natal'; --Lista o cpf, nome e email dos pacientes que moram em Natal 
+    WHERE Pessoa.endereco = 'Natal'; --Lista o cpf, nome e email dos pacientes que moram em Natal 
 
-SELECT cpf, nome, email, data_nascimento
+SELECT cpf, nome, email, data_nasc
     FROM Pessoa
     JOIN Paciente
     ON Pessoa.cpf = Paciente.cpf_pessoa
-ORDER BY data_nascimento; -- Seleciona o nome, email e data_nascimento ordenado pela data de nascimento
+ORDER BY Pessoa.data_nasc; -- Seleciona o nome, email e data_nascimento ordenado pela data de nascimento
 
 SELECT COUNT(*) AS quantidade_pacientes
 FROM Paciente
 WHERE plano_saude IS NULL; -- Conta quantos pacientes existem e quais possuem o plano de saúde vazio
 
-SELECT data_consulta,
-       MAX(valor) AS maior_valor,
-       MIN(valor) AS menor_valor
-FROM consulta
-GROUP BY data_consulta; 
+SELECT dh_consulta,
+        MAX(valor) AS maior_valor,
+        MIN(valor) AS menor_valor
+FROM Agendamento
+GROUP BY dh_consulta; 
 
 
 
