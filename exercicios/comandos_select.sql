@@ -26,12 +26,11 @@ SELECT nome, cpf, email
     JOIN Paciente
     ON Pessoa.cpf = Paciente.cpf_pessoa
 
-    WHERE Paciente.plano_saude = false
+    WHERE Paciente.plano_saude = false;
 
--- SELECT
---     nome,
---     cpf,
---     email
+-- SELECT nome, cpf, email
+--     FROM Pessoa
+    
     
 -- FROM Paciente -- De Paciente
 -- WHERE plano_saude IS NULL; -- onde plano_saude é nulo
@@ -42,18 +41,18 @@ SELECT * -- Seleciona todas as colunas da tabela Agendamento.
 
 FROM Agendamento 
 
-WHERE EXTRACT(MONTH FROM dh_agendamento) = EXTRACT(MONTH FROM dh_consulta); /* EXTRACT(MONTH FROM ...) extrai apenas o mês da data. Apenas os agendamentos em que o mês do registro é igual ao mês da consulta serão exibidos. */
+WHERE EXTRACT(MONTH FROM dh_agenda) = EXTRACT(MONTH FROM dh_consulta); /* EXTRACT(MONTH FROM ...) extrai apenas o mês da data. Apenas os agendamentos em que o mês do registro é igual ao mês da consulta serão exibidos. */
 
 -- QUESTÃO 9 Lista cpf, nome e e-mail dos pacientes que não possuem telefone.
 
-SELECT   
-    cpf,
-    nome,
-    email
+-- SELECT   
+--     cpf,
+--     nome,
+--     email
 
-FROM Paciente 
+-- FROM Paciente 
 
-WHERE telefone IS NULL; -- Filtra apenas os pacientes cujo telefone não foi informado.
+-- WHERE telefone IS NULL; -- Filtra apenas os pacientes cujo telefone não foi informado.
 
 -- QUESTÃO 10 Listar a data das consultas cujo valor está entre R$ 50,00 e R$ 100,00.
 
@@ -66,11 +65,15 @@ WHERE valor_consulta BETWEEN 50.00 AND 100.00; -- BETWEEN verifica se um valor e
 -- Parte de Gustavo
 
 SELECT cpf, nome, email
-FROM Paciente
-WHERE cidade = 'Natal'; --Lista o cpf, nome e email dos pacientes que moram em Natal 
+    FROM Pessoa
+    JOIN Paciente
+    ON Pessoa.cpf = Paciente.cpf_pessoa
+    WHERE cidade = 'Natal'; --Lista o cpf, nome e email dos pacientes que moram em Natal 
 
 SELECT cpf, nome, email, data_nascimento
-FROM paciente
+    FROM Pessoa
+    JOIN Paciente
+    ON Pessoa.cpf = Paciente.cpf_pessoa
 ORDER BY data_nascimento; -- Seleciona o nome, email e data_nascimento ordenado pela data de nascimento
 
 SELECT COUNT(*) AS quantidade_pacientes
