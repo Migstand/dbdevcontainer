@@ -1,5 +1,6 @@
 -- ** PARTE DE MIGUEL **
-SELECT * FROM Pessoa; --Coleta todos os dados da tabela pessoa
+
+--Coleta todos os dados da tabela pessoa
 SELECT nome, email, data_nasc 
     FROM Pessoa; -- Lista todos os nome, emails e datas de nascimento
 
@@ -68,7 +69,7 @@ SELECT cpf, nome, email
     FROM Pessoa
     JOIN Paciente
     ON Pessoa.cpf = Paciente.cpf_pessoa
-    WHERE Pessoa.endereco = 'Natal'; --Lista o cpf, nome e email dos pacientes que moram em Natal 
+    WHERE Pessoa.endereco ILIKE '%Natal%'; --Lista o cpf, nome e email dos pacientes que moram em Natal 
 
 SELECT cpf, nome, email, data_nasc
     FROM Pessoa
@@ -78,13 +79,12 @@ ORDER BY Pessoa.data_nasc; -- Seleciona o nome, email e data_nascimento ordenado
 
 SELECT COUNT(*) AS quantidade_pacientes
 FROM Paciente
-WHERE plano_saude IS NULL; -- Conta quantos pacientes existem e quais possuem o plano de saúde vazio
+WHERE plano_saude = FALSE; -- Conta quantos pacientes existem e quais possuem o plano de saúde vazio
 
-SELECT dh_consulta,
-        MAX(valor) AS maior_valor,
-        MIN(valor) AS menor_valor
-FROM Agendamento
-GROUP BY dh_consulta; 
+SELECT 
+        MAX(valor_consulta) AS maior_valor,
+        MIN(valor_consulta) AS menor_valor
+FROM Agendamento;
 
 
 
@@ -99,7 +99,7 @@ SELECT AVG(valor_consulta) AS media_valores -- Calcula a média dos valores das 
 
 
 -- Questão 16
-SELECT nome, email, data_nasc -- Seleciona o nome, e-mail e data de nascimento da pessoa
+SELECT DISTINCT Pessoa.nome, Pessoa.email, Pessoa.data_nasc -- Seleciona o nome, e-mail e data de nascimento da pessoa
     FROM Pessoa -- Começa pela tabela Pessoa
 
     JOIN Paciente -- Relaciona a pessoa com o cadastro de paciente
@@ -114,7 +114,7 @@ SELECT nome, email, data_nasc -- Seleciona o nome, e-mail e data de nascimento d
 
 
 -- Questão 17
-SELECT nome, email, cpf, descricao -- Seleciona o nome, e-mail, CPF e a descrição da especialidade
+SELECT Pessoa.nome, Pessoa.email, Pessoa.cpf, Especialidade.descricao -- Seleciona o nome, e-mail, CPF e a descrição da especialidade
     FROM Pessoa
 
     JOIN Medico -- Relaciona a pessoa com o cadastro de médico
@@ -128,7 +128,7 @@ SELECT nome, email, cpf, descricao -- Seleciona o nome, e-mail, CPF e a descriç
 
 
 -- Questão 18
-SELECT Pessoa.nome, -- Nome do médico
+SELECT Pessoa.cpf ,Pessoa.nome, -- Nome do médico
     COUNT(Agendamento.dh_consulta) AS quantidade_consultas -- Conta quantas consultas esse médico possui
     
     FROM Pessoa
@@ -139,4 +139,4 @@ SELECT Pessoa.nome, -- Nome do médico
     JOIN Agendamento -- Relaciona o médico às consultas agendadas
     ON Medico.cpf_pessoa = Agendamento.cpf_medico
 
-    GROUP BY Pessoa.nome;
+    GROUP BY Pessoa.cpf, Pessoa.nome;
