@@ -80,9 +80,11 @@ GROUP BY Pessoa.nome; -- Agrupa os registros por médico para que o COUNT conte 
 
 -- ** Parte de Miguel **
 
-SELECT c.*, m.*
-    FROM dbex.Especialidade c INNER JOIN dbex.Medico  m,
-    where c.nome = m.crem; -- Seleciona todos os médico que fam parte daquela especialidade
+SELECT esp.*, med.*
+    FROM Especialidade esp INNER JOIN Medico  med,
+    JOIN MedicoEspecialidade
+    ON med.cpf = MedicoEspecialidade.cpf
+    where med.nome = m.crem; -- Seleciona todos os médico que fam parte daquela especialidade
 
 SELECT 
 
