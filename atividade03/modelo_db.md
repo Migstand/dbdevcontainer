@@ -27,20 +27,18 @@
 | email | email do cliente | VARCHAR | 255 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
 | observacoes | detalhamento do pagamento | VARCHAR | 255 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9745; |
 | sobrenome | segundo nome do cliente | VARCHAR | 255 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
-| numero | numero do cartão | VARCHAR | 16 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
+| numero | numero do cartão | VARCHAR | 20 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
 | tipo_pagamento | tipo do pagamento da compra | VARCHAR | 50 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
 | pais | nome do país | VARCHAR | 255 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
 | id_pagamento_cartao | cartão do pagamento | INT |  | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9744; |
-| QRcode | QRcode do pagamento | VARCHAR | 255 | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9744; |
-| codigo | Código do pagemento | VARCHAR | 255 | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9744; |
+| id_pix | identificador do pagamento pix | INT |  | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9744; |
 | produto | identificação dos produtos | INT |  | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9744; |
 | id_linha_credito | identificação do pagamento em crédito | INT |  | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9744; |
 | id_boleto | identificação do pagamento em boleto | INT |  | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9744; |
-| id_endereco | chave do endereço | INT |  | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9744; |
-| cep | cep do endereço | VARCHAR | 10 | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9744; |
+| id_endereco | cep do endereço | VARCHAR | 10 | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9744; |
 
 
-**Tabela:** Localização
+**Tabela:** Localizacao
 
 | Colunas | Descrição | Tipo de Dado | Tamanho | Null | PK | FK | Unique | Identity | Default | Optional |
 | ------- | --------- | ------------ | ------- | ---- | -- | -- | ------ | -------- | ------- | ------- |
@@ -76,16 +74,17 @@
 
 | Colunas | Descrição | Tipo de Dado | Tamanho | Null | PK | FK | Unique | Identity | Default | Optional |
 | ------- | --------- | ------------ | ------- | ---- | -- | -- | ------ | -------- | ------- | ------- |
-| produto | identificação dos produtos | INT |  | &#9744;  | &#9745; | &#9744; | &#9744; | &#9745; |  | &#9744; |
+| id | identificação dos produtos | INT |  | &#9744;  | &#9745; | &#9744; | &#9744; | &#9745; |  | &#9744; |
 | descricao | descrição do produto | VARCHAR | 255 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
 | envio | tipo de envio do produto | VARCHAR | 255 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
-| subtotal | total parcial do valor do produto | FLOAT |  | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9745; |
+| id_subtotal | identificador do total parcial do valor do produto | INT |  | &#9744;  | &#9744; | &#9745; | &#9744; | &#9744; |  | &#9745; |
 
 **Tabela:** Valor
 
 | Colunas | Descrição | Tipo de Dado | Tamanho | Null | PK | FK | Unique | Identity | Default | Optional |
 | ------- | --------- | ------------ | ------- | ---- | -- | -- | ------ | -------- | ------- | ------- |
-| subtotal | total parcial do valor do produto | FLOAT |  | &#9744;  | &#9745; | &#9744; | &#9744; | &#9744; |  | &#9744; |
+| id_subtotal | identificador do total parcial do valor do produto | INT |  | &#9744;  | &#9745; | &#9744; | &#9744; | &#9744; |  | &#9745; |
+| subtotal | total parcial do valor do produto | FLOAT |  | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
 | total | total do valor do produto | FLOAT |  | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
 
 
@@ -93,16 +92,17 @@
 
 | Colunas | Descrição | Tipo de Dado | Tamanho | Null | PK | FK | Unique | Identity | Default | Optional |
 | ------- | --------- | ------------ | ------- | ---- | -- | -- | ------ | -------- | ------- | ------- |
-| QRcode | QRcode do pagamento | VARCHAR | 255 | &#9744;  | &#9745; | &#9744; | &#9744; | &#9744; |  | &#9744; |
-| codigo | Código do pagemento | VARCHAR | 255 | &#9744;  | &#9745; | &#9744; | &#9744; | &#9744; |  | &#9744; |
+| id_pix | identificador do pagamento pix | INT |  | &#9744;  | &#9745; | &#9744; | &#9744; | &#9744; |  | &#9744; |
+| QRcode | QRcode do pagamento | VARCHAR | 255 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
+| codigo | Código do pagemento | VARCHAR | 255 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
 
 
-**Tabela:** Pagamento_cartão
+**Tabela:** Pagamento_cartao
 
 | Colunas | Descrição | Tipo de Dado | Tamanho | Null | PK | FK | Unique | Identity | Default | Optional |
 | ------- | --------- | ------------ | ------- | ---- | -- | -- | ------ | -------- | ------- | ------- |
 | id_pagamento_cartao | cartão do pagamento | INT |  | &#9744;  | &#9745; | &#9744; | &#9744; | &#9745; |  | &#9744; |
-| numero_cartao | numero do cartão do cliente | VARCHAR | 16 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
+| numero_cartao | numero do cartão do cliente | VARCHAR | 20 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
 | nome_titular | nome do responsável do cartão | VARCHAR | 255 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |  
 | vencimento | data do vencimento do | DATE |  | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
 | codigo_segurança | código de segurança do cartão | VARCHAR | 255 | &#9744;  | &#9744; | &#9744; | &#9744; | &#9744; |  | &#9744; |
