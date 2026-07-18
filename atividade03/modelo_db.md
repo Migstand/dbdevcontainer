@@ -9,7 +9,7 @@
 - Criar comandos sql do site **ORQUIDÁRIO MATSUOKA** utilizando como base o diagrama relacional e o dicionário de dados feitos anteriormente pela equipe.
 
 ## Diagrama Relacional:
-![Imagem do diagrama relacional](imgs/Orquidário_Relacional_Final.png)
+![Imagem do diagrama relacional](imgs/Final_Matsuoka.png)
 
 ## Dicionário de Dados:
 
