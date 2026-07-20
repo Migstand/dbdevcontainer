@@ -39,7 +39,6 @@ CREATE TABLE IF NOT EXISTS DescricaoProduto(
     envio VARCHAR (255) NOT NULL,
     subtotal_valor INT NOT NULL,
     CONSTRAINT subtotal_valor_fk FOREIGN KEY(subtotal_valor) REFERENCES Valor(id)
-
 );
 
 
@@ -70,13 +69,11 @@ CREATE TABLE IF NOT EXISTS Pagamento(
     id_produto INT NOT NULL,
     id_boleto INT NOT NULL,
     id_endereco VARCHAR (10) NOT NULL,
-
     CONSTRAINT id_pix_fk FOREIGN KEY(id_pix) REFERENCES Pagamento_pix(id),
     CONSTRAINT id_pagamento_cartao_fk FOREIGN KEY(id_pagamento_cartao) REFERENCES Pagamento_cartao(id),
     CONSTRAINT id_linha_credito_fk FOREIGN KEY(id_linha_credito) REFERENCES Pagamento_linha_credito(id),
     CONSTRAINT id_produto_fk FOREIGN KEY(id_produto) REFERENCES DescricaoProduto(id),
     CONSTRAINT id_boleto_fk FOREIGN KEY(id_boleto) REFERENCES Pagamento_boleto(id),
     CONSTRAINT id_endereco_fk FOREIGN KEY(id_endereco) REFERENCES Localizacao(cep)
-    
-
 );
+    
