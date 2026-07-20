@@ -1,9 +1,11 @@
+-- A1. Cria a tabela Pagamento_pix
 CREATE TABLE IF NOT EXISTS Pagamento_pix(
     id INT PRIMARY KEY,
     QRcode VARCHAR (255) NOT NULL,
     codigo VARCHAR (255) NOT NULL
 );
 
+-- A2. Cria a tabela Pagamento_cartao
 CREATE TABLE IF NOT EXISTS Pagamento_cartao(
     id INT PRIMARY KEY,
     numero_cartao VARCHAR (20) NOT NULL,
@@ -13,12 +15,14 @@ CREATE TABLE IF NOT EXISTS Pagamento_cartao(
     agencia VARCHAR (255) NOT NULL
 );
 
+-- A3. Cria a tabela Pagamento_linha_credito
 CREATE TABLE IF NOT EXISTS Pagamento_linha_credito(
     id INT PRIMARY KEY,
     parcelas INT NOT NULL,
     agencia VARCHAR (255) NOT NULL
 );
 
+-- A4. Cria a tabela Localizacao
 CREATE TABLE IF NOT EXISTS Localizacao(
     cep VARCHAR (10) PRIMARY KEY,
     cidade VARCHAR (255) NOT NULL,
@@ -27,12 +31,14 @@ CREATE TABLE IF NOT EXISTS Localizacao(
     bairro VARCHAR (255) NOT NULL
 );
 
+-- A5. Cria a tabela Valor
 CREATE TABLE IF NOT EXISTS Valor(
     id INT PRIMARY KEY,
     subtotal FLOAT NOT NULL,
     total FLOAT NOT NULL
 );
 
+-- A6. Cria a tabela DescricaoProduto
 CREATE TABLE IF NOT EXISTS DescricaoProduto(
     id INT PRIMARY KEY,
     descricao VARCHAR (255) NOT NULL,
@@ -41,7 +47,7 @@ CREATE TABLE IF NOT EXISTS DescricaoProduto(
     CONSTRAINT subtotal_valor_fk FOREIGN KEY(subtotal_valor) REFERENCES Valor(id)
 );
 
-
+-- A7. Cria a tabela Pagamento_boleto
 CREATE TABLE IF NOT EXISTS Pagamento_boleto(
     id INT PRIMARY KEY,
     cpf VARCHAR (15) NOT NULL,
@@ -51,6 +57,7 @@ CREATE TABLE IF NOT EXISTS Pagamento_boleto(
     CONSTRAINT CEP_LOCALIZACAO_FK FOREIGN KEY(cep_localizacao) REFERENCES Localizacao(cep)
 );
 
+-- A8. Cria a tabela Pagamento
 CREATE TABLE IF NOT EXISTS Pagamento(
     id INT PRIMARY KEY,
     nome VARCHAR (255) NOT NULL,
